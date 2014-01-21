@@ -1,3 +1,14 @@
+use lib qw(inc);
+use Devel::CheckLib;
+
+# Prompt the user here for any paths and other configuration
+
+check_lib_or_exit(
+    # fill in what you prompted the user for here
+    lib => [qw()]
+);
+
+
 use strict;
 use warnings;
 use ExtUtils::MakeMaker;
@@ -17,7 +28,7 @@ my %prereqs = (
 );
 
 my $pm = 'lib/Image/PNG/Cairo.pm';
-my $github = 'github.com/benkasminbullock/Image-PNG-Cairo';
+my $github = 'github.com/benkasminbullock/image-png-cairo';
 my $repo = "https://$github";
 
 my %extreqs = (
@@ -53,6 +64,8 @@ WriteMakefile (
     AUTHOR => 'Ben Bullock <bkb@cpan.org>',
     LICENSE => 'perl',
     PREREQ_PM => {
+	'Image::PNG::Libpng' => '0.24',
+	'Cairo' => '0',
     },
     META_MERGE => {
 	'meta-spec' => {
@@ -76,5 +89,6 @@ WriteMakefile (
 	},
     },
     OBJECT => 'Cairo.o',
+    MIN_PERL_VERSION => '5.008001',
     $dep->get_makefile_vars,
 );

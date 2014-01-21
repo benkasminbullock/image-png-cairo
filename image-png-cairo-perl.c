@@ -1,5 +1,5 @@
 
-static void
+static png_byte **
 fill_png_from_cairo_surface (cairo_surface_t * surface,
 			     png_structp png, png_infop info)
 {
@@ -28,9 +28,13 @@ fill_png_from_cairo_surface (cairo_surface_t * surface,
     png_set_IHDR (png, info, width, height, 8, PNG_COLOR_TYPE_RGB_ALPHA,
 		  PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT,
 		  PNG_FILTER_TYPE_DEFAULT);
-    row_pointers = malloc (height * sizeof (png_byte *));
+    Newx (row_pointers, height, png_byte *);
     for (y = 0; y < height; ++y) {
         row_pointers[y] = data
                         + width * pixel_bytes * y;
     }
+    png_set_rows (png, info, row_pointers);
+    /* This is going back to Perl and it will be freed inside
+       Image::PNG::Libpng. */
+    return row_pointers;
 }

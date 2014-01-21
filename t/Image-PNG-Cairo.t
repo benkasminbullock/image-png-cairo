@@ -6,16 +6,29 @@ use Test::More;
 use Cairo;
 use Image::PNG::Libpng;
 use Image::PNG::Cairo 'cairo_to_png';
-#use Devel::Peek;
 
 my $surface = Cairo::ImageSurface->create ('argb32', 100, 100);
 my $cr = Cairo::Context->create ($surface);
+$cr->set_source_rgb (1.0, 0.0, 0.0);
 $cr->rectangle (0, 0, 100, 100);
 $cr->fill ();
-#Dump ($surface);
 my $png = cairo_to_png ($surface);
 
 ok ($png, "Got PNG");
+
+# Check the colour really is red to make sure that the transforms
+# worked OK.
+
+my $out = 'red-100x100.png';
+
+$png->write_png_file ($out);
+
+# Tidy up file.
+
+if (-f $out) {
+    unlink $out;
+}
+
 
 done_testing ();
 

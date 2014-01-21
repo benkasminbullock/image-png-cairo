@@ -14,3 +14,7 @@ blib/*
 MYMETA.*
 META.*
 ppport.h
+README
+*.png
+t/*.png
+inc/Devel/CheckLib.pm
