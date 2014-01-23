@@ -33,8 +33,5 @@ fill_png_from_cairo_surface (cairo_surface_t * surface,
         row_pointers[y] = data
                         + width * pixel_bytes * y;
     }
-    png_set_rows (png, info, row_pointers);
-    /* This is going back to Perl and it will be freed inside
-       Image::PNG::Libpng. */
     return row_pointers;
 }

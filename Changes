@@ -1,3 +1,8 @@
+0.03 2014-01-23
+
+* Memory handling overhaul.
+* Now requires Image::PNG::Libpng 0.28.
+
 0.02 2014-01-21
 
 * Build updates / minor fixes

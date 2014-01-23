@@ -45,7 +45,7 @@ require Exporter;
 use warnings;
 use strict;
 use Carp;
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 require XSLoader;
 XSLoader::load ('Image::PNG::Cairo', $VERSION);
 use Cairo;
@@ -63,7 +63,8 @@ sub cairo_to_png
     my $row_pointers = fill_png_from_cairo_surface ($surface, $pngs, $info);
     # Set up the transforms of data.
     $png->set_transforms (PNG_TRANSFORM_BGR);
-    $png->set_row_pointers ($row_pointers);
+    $png->copy_row_pointers ($row_pointers);
+    free_row_pointers ($row_pointers);
     return $png;
 }
 

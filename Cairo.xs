@@ -11,9 +11,6 @@ MODULE=Image::PNG::Cairo PACKAGE=Image::PNG::Cairo
 
 PROTOTYPES: DISABLE
 
-BOOT:
-	/* Image__PNG__Cairo_error_handler = perl_error_handler; */
-
 SV * fill_png_from_cairo_surface (surface, png, info)
      	SV * surface;
 	SV * png;
@@ -33,3 +30,11 @@ CODE:
 	sv_setref_pv (RETVAL, "Image::PNG::Libpng::row_pointers", row_pointers);
 OUTPUT:
 	RETVAL
+
+void free_row_pointers (row_pointers)
+	SV * row_pointers
+PREINIT:
+	png_byte ** crow_pointers;
+CODE:
+	crow_pointers = INT2PTR (png_byte **, SvIV ((SV *) SvRV (row_pointers)));
+	Safefree (crow_pointers);
