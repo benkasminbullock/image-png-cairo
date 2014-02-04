@@ -18,3 +18,5 @@ README
 *.png
 t/*.png
 inc/Devel/CheckLib.pm
+lib/Image/PNG/Cairo.pod
+

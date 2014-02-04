@@ -1,4 +1,4 @@
-build\.pl
+^build\.pl$
 blib/.*
 .gitignore
 .git/.*
@@ -9,3 +9,5 @@ MYMETA..*
 ^Image-PNG-Cairo-[0-9\.]+/$
 ^Image-PNG-Cairo-[0-9\.]+\.tar\.gz$
 ^Cairo.(?:c|o|bs)$
+^lib/Image/PNG/Cairo\.pod\.tmpl$
+^build/make-pod\.pl$

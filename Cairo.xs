@@ -3,6 +3,13 @@
 #include "XSUB.h"
 #include "ppport.h"
 #include "cairo.h"
+
+/* There is some kind of collision between a file included by "perl.h"
+   and "png.h" for very old versions of libpng, like the one used on
+   Ubuntu Linux. */
+
+#define PNG_SKIP_SETJMP_CHECK
+
 #include "png.h"
 
 #include "image-png-cairo-perl.c"

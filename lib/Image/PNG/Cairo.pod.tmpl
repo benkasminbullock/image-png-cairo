@@ -1,0 +1,78 @@
+#!/home/ben/software/install/bin/perl
+use warnings;
+use strict;
+=encoding UTF-8
+
+=head1 NAME
+
+Image::PNG::Cairo - extract PNG data from a Cairo::ImageSurface
+
+=head1 SYNOPSIS
+
+    use Image::PNG::Cairo 'cairo_to_png';
+    use Cairo;
+    my $surface = Cairo::ImageSurface->new ('argb32', 100, 100);
+    # Draw something on surface.
+    my $png = cairo_to_png ($surface);
+    # Now can use the methods of Image::PNG::Libpng on the PNG,
+    # e.g. write to file.
+
+=head1 DESCRIPTION
+
+This is a bridge between L<Cairo> and L<Image::PNG::Libpng> which
+allows the user to extract the image data from a Cairo::ImageSurface
+into a structure which can then be manipulated to add other kinds of
+data.
+
+=head1 FUNCTIONS
+
+=head2 cairo_to_png
+
+    my $png = cairo_to_png ($surface);
+
+Only surfaces of type 'argb32' are supported.
+
+=head1 EXAMPLES
+
+=head2 Captcha
+
+This example CGI program makes a captcha from random letters. It also
+includes the captcha text and the date and time of creation of the
+image in the PNG.
+
+[% INCLUDE "captcha.pl" | xtidy %]
+
+=begin html
+
+<p>
+The captcha looks like this:
+</p>
+<p>
+<a href="http://www.lemoda.net/png/png-cairo-captcha/"><img src="http://www.lemoda.net/png/png-cairo-captcha/captcha.cgi" width=200 height=50></a>
+</p>
+
+=end html
+
+Disclaimer: please do not use this example program in the stead of a
+real captcha.
+
+=head1 SEE ALSO
+
+=over
+
+=item Cairo
+
+L<Cairo> is a general-purpose drawing program.
+
+=item Image::PNG::Libpng
+
+L<Image::PNG::Libpng> is a Perl wrapper to the C PNG library libpng.
+
+=back
+
+=head1 LICENCE, COPYRIGHT, AUTHOR
+
+Copyright Ben Bullock <bkb@cpan.org> 2014; this module may be used,
+redistributed, and modified under the same terms as Perl itself.
+
+=cut
