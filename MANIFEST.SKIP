@@ -10,4 +10,5 @@ MYMETA..*
 ^Image-PNG-Cairo-[0-9\.]+\.tar\.gz$
 ^Cairo.(?:c|o|bs)$
 ^lib/Image/PNG/Cairo\.pod\.tmpl$
-^build/make-pod\.pl$
+^make-pod\.pl$
+^examples/.*-out\.txt$

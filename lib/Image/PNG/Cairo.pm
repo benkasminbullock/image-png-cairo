@@ -8,7 +8,7 @@ require Exporter;
 use warnings;
 use strict;
 use Carp;
-our $VERSION = '0.04';
+our $VERSION = '0.08';
 require XSLoader;
 XSLoader::load ('Image::PNG::Cairo', $VERSION);
 use Cairo;
@@ -19,7 +19,7 @@ sub cairo_to_png
 {
     my ($surface) = @_;
     if (ref $surface ne 'Cairo::ImageSurface') {
-	croak "Bad input " . ref $surface;
+	croak "Bad input " . ref ($surface) . ": require Cairo::ImageSurface";
     }
     my $png = create_write_struct ();
     my ($pngs, $info) = get_internals ($png);

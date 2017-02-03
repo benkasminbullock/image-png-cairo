@@ -1,6 +1,9 @@
-#!/home/ben/software/install/bin/perl
-use warnings;
-use strict;
+[% start_year=2014 %]
+[% MACRO example(file) BLOCK %]
+[%- pl =  file _ ".pl" -%]
+[% INCLUDE $pl | xtidy %]
+(This example is included as L<F<[% pl %]>|https://api.metacpan.org/source/BKB/[% info.name %]-[% info.version %]/examples/[% pl %]> in the distribution.)
+[%- END %]
 =encoding UTF-8
 
 =head1 NAME
@@ -9,13 +12,13 @@ Image::PNG::Cairo - extract PNG data from a Cairo::ImageSurface
 
 =head1 SYNOPSIS
 
-    use Image::PNG::Cairo 'cairo_to_png';
-    use Cairo;
-    my $surface = Cairo::ImageSurface->new ('argb32', 100, 100);
-    # Draw something on surface.
-    my $png = cairo_to_png ($surface);
-    # Now can use the methods of Image::PNG::Libpng on the PNG,
-    # e.g. write to file.
+[% example("synopsis") %]
+
+=head1 VERSION
+
+This documents [% info.colon %] version [% info.version %]
+corresponding to git commit L<[% commit.commit %]|[% info.repo
+%]/commit/[% commit.commit %]> released on [% commit.date %].
 
 =head1 DESCRIPTION
 
@@ -30,7 +33,18 @@ data.
 
     my $png = cairo_to_png ($surface);
 
-Only surfaces of type 'argb32' are supported.
+The input, C<$surface>, is a L<Cairo::ImageSurface> object. Only Cairo
+surfaces of type 'argb32' are supported. The return value is an
+L<Image::PNG::Libpng> object, with its image dimensions, bit depth,
+colour type, and image data taken from C<$surface>. C<$png>
+corresponds to the return value of the L<Image::PNG::Libpng> method
+C<create_write_struct> with the methods C<set_IHDR> and C<set_rows>
+and C<set_transforms> applied to it using data extracted from
+C<$surface>.
+
+C<$png> is set up using the Image::PNG::Libpng method
+C<set_transforms> such that the PNG image data is transformed on
+writing from the Cairo image data format to the PNG format.
 
 =head1 EXAMPLES
 
@@ -40,21 +54,9 @@ This example CGI program makes a captcha from random letters. It also
 includes the captcha text and the date and time of creation of the
 image in the PNG.
 
-[% INCLUDE "captcha.pl" | xtidy %]
+[% example("captcha") %]
 
-=begin html
-
-<p>
-The captcha looks like this:
-</p>
-<p>
-<a href="http://www.lemoda.net/png/png-cairo-captcha/"><img src="http://www.lemoda.net/png/png-cairo-captcha/captcha.cgi" width=200 height=50></a>
-</p>
-
-=end html
-
-Disclaimer: please do not use this example program in the stead of a
-real captcha.
+Please do not use this example program in the stead of a real captcha.
 
 =head1 SEE ALSO
 
@@ -70,9 +72,4 @@ L<Image::PNG::Libpng> is a Perl wrapper to the C PNG library libpng.
 
 =back
 
-=head1 LICENCE, COPYRIGHT, AUTHOR
-
-Copyright Ben Bullock <bkb@cpan.org> 2014; this module may be used,
-redistributed, and modified under the same terms as Perl itself.
-
-=cut
+[% INCLUDE "author" %]

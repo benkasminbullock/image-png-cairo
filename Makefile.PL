@@ -28,6 +28,7 @@ my %prereqs = (
 );
 
 my $pm = 'lib/Image/PNG/Cairo.pm';
+my $pod = 'lib/Image/PNG/Cairo.pod';
 my $github = 'github.com/benkasminbullock/image-png-cairo';
 my $repo = "https://$github";
 
@@ -60,11 +61,11 @@ $dep->set_libs ($cairo_cfg{libs});
 WriteMakefile (
     NAME => 'Image::PNG::Cairo',
     VERSION_FROM => $pm,
-    ABSTRACT_FROM => $pm,
+    ABSTRACT_FROM => $pod,
     AUTHOR => 'Ben Bullock <bkb@cpan.org>',
     LICENSE => 'perl',
     PREREQ_PM => {
-	'Image::PNG::Libpng' => '0.28',
+	'Image::PNG::Libpng' => '0.31',
 	'Cairo' => '0',
     },
     META_MERGE => {

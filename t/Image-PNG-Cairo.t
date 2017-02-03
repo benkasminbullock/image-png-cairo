@@ -29,6 +29,13 @@ if (-f $out) {
     unlink $out;
 }
 
+# error test
+
+eval {
+cairo_to_png ({});
+};
+ok ($@, "got error with cairo_to_png ({})");
+like ($@, qr/Cairo::ImageSurface/);
 
 done_testing ();
 
