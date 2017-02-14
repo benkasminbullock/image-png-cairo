@@ -12,7 +12,7 @@ my $tt = Template->new (
     ABSOLUTE => 1,
     INCLUDE_PATH => [
 	$exdir,
-	"/home/ben/projects/Perl-Build/lib/Perl/Build/templates",
+	pbtmpl (),
     ],
     FILTERS => {
         xtidy => [
